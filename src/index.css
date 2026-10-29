@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    /* Snap scroll - frame by frame */
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  body {
+    background-color: #000000;
+    color: #EBD5AB;
+    font-family: 'Archivo', sans-serif;
+    overflow-x: hidden;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
+  }
+}
+
+@layer utilities {
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .perspective { perspective: 1200px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .rotate-y-180 { transform: rotateY(180deg); }
+
+  /* Lace thread */
+  .lace-thread {
+    width: 0px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      #EBD5AB 10%,
+      #EBD5AB 90%,
+      transparent 100%
+    );
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #000; }
+  ::-webkit-scrollbar-thumb { background: #EBD5AB44; border-radius: 2px; }
+}
+
+/* Puzzle icon float animation */
+@keyframes floatPuzzle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(3deg); }
+  66% { transform: translateY(4px) rotate(-2deg); }
+}
+
+.puzzle-float {
+  animation: floatPuzzle 4s ease-in-out infinite;
+}
+
+/* Bouncing arrow */
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(10px); opacity: 1; }
+}
+.bounce-arrow {
+  animation: bounceArrow 2s ease-in-out infinite;
+}
+
+/* Card idle spin */
+@keyframes cardSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
